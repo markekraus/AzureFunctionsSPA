@@ -138,7 +138,6 @@
         "AZDO_API_VERSION": "[variables('AZDO_API_VERSION')]",
         "AZDO_DEFAULT_ORG_NAME": "[variables('AZDO_DEFAULT_ORG_NAME')]",
         "AZDO_DEFAULT_ORG_ID": "[variables('AZDO_DEFAULT_ORG_ID')]"
-        }
       }
     },
     {
