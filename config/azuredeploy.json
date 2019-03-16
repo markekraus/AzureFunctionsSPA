@@ -113,65 +113,33 @@
       },
       "properties": {
         "enabled": true,
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('servicePlanName'))]",
-        "appSettings": [
-          {
-            "name": "FUNCTIONS_EXTENSION_VERSION",
-            "value": "~2"
-          },
-          {
-            "name": "FUNCTIONS_WORKER_RUNTIME",
-            "value": "dotnet"
-          },
-          {
-            "name": "WEBSITE_NODE_DEFAULT_VERSION",
-            "value": "10.14.1"
-          },
-          {
-            "name": "WEBSITE_CONTENTSHARE",
-            "value": "[variables('storageName')]"
-          },
-          {
-            "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
-            "value": "[Concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value)]"
-          },
-          {
-            "name": "AzureWebJobsStorage",
-            "value": "[Concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value)]"
-          },
-          {
-            "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
-            "value": "[reference(concat('microsoft.insights/components/', variables('functionName'))).InstrumentationKey]"
-          },
-          {
-            "name": "DEBUG_ENABLED",
-            "value": "[variables('DEBUG_ENABLED')]"
-          },
-          {
-            "name": "STATIC_FILES_PATH",
-            "value": "[variables('STATIC_FILES_PATH')]"
-          },
-          {
-            "name": "DEFAULT_PAGE",
-            "value": "[variables('DEFAULT_PAGE')]"
-          },
-          {
-            "name": "AZDO_API_VERSION",
-            "value": "[variables('AZDO_API_VERSION')]"
-          },
-          {
-            "name": "AZDO_DEFAULT_ORG_NAME",
-            "value": "[variables('AZDO_DEFAULT_ORG_NAME')]"
-          },
-          {
-            "name": "AZDO_DEFAULT_ORG_ID",
-            "value": "[variables('AZDO_DEFAULT_ORG_ID')]"
-          }
-        ]
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('servicePlanName'))]"
       },
       "dependsOn": [
         "[resourceId('Microsoft.Web/serverfarms', variables('servicePlanName'))]"
       ]
+    },
+    {
+      "apiVersion": "2018-02-01",
+      "name": "[concat(variables('functionName'),'/appSettings')]",
+      "type": "Microsoft.Web/sites/config",
+      "location": "[variables('location')]",
+      "properties":{
+        "FUNCTIONS_EXTENSION_VERSION": "~2",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+        "WEBSITE_NODE_DEFAULT_VERSION": "10.14.1",
+        "WEBSITE_CONTENTSHARE": "[variables('storageName')]",
+        "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING": "[Concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value)]",
+        "AzureWebJobsStorage": "[Concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value)]",
+        "APPINSIGHTS_INSTRUMENTATIONKEY": "[reference(concat('microsoft.insights/components/', variables('functionName'))).InstrumentationKey]",
+        "DEBUG_ENABLED": "[variables('DEBUG_ENABLED')]",
+        "STATIC_FILES_PATH": "[variables('STATIC_FILES_PATH')]",
+        "DEFAULT_PAGE": "[variables('DEFAULT_PAGE')]",
+        "AZDO_API_VERSION": "[variables('AZDO_API_VERSION')]",
+        "AZDO_DEFAULT_ORG_NAME": "[variables('AZDO_DEFAULT_ORG_NAME')]",
+        "AZDO_DEFAULT_ORG_ID": "[variables('AZDO_DEFAULT_ORG_ID')]"
+        }
+      }
     },
     {
       "apiVersion": "2018-02-01",
