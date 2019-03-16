@@ -1,0 +1,46 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "functionName": {
+      "value": "mekspaaf"
+    },
+    "location": {
+      "value": "West US 2"
+    },
+    "clientId": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/8a0531e5-83cc-462c-8590-523df6fb7215/resourceGroups/mekspaafKV/providers/Microsoft.KeyVault/vaults/mekspaafKV"
+        },
+        "secretName": "clientid"
+      }
+    },
+    "clientSecret": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/8a0531e5-83cc-462c-8590-523df6fb7215/resourceGroups/mekspaafKV/providers/Microsoft.KeyVault/vaults/mekspaafKV"
+        },
+        "secretName": "clientsecret"
+      }
+    },
+    "DEBUG_ENABLED": {
+        "value": "false"
+    },
+    "STATIC_FILES_PATH": {
+        "value": "www"
+    },
+    "DEFAULT_PAGE": {
+        "value": "index.html"
+    },
+    "AZDO_API_VERSION": {
+        "value": "5.0"
+    },
+    "AZDO_DEFAULT_ORG_NAME": {
+        "value": "markekraus"
+    },
+    "AZDO_DEFAULT_ORG_ID": {
+        "value": "c6229e7c-259c-449a-98f4-48a262dfab5a"
+    }
+  }
+}
