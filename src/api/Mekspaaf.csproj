@@ -8,10 +8,16 @@
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.AuthTokens" Version="1.0.0-beta6" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.24" />
   </ItemGroup>
+  <Target Name="var dump" AfterTargets="Publish">
+    <Exec Command="echo PublishDir: $(PublishDir)" />
+  </Target>
+  <Target Name="ember build" AfterTargets="Publish">
+    <Exec Command="echo ember build" />
+    <Exec
+        Command="ember build --silent --environment production --output-path $(PublishDir)/www"
+        WorkingDirectory="../client"/>
+  </Target>
   <ItemGroup>
-    <None Update="www/**">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="host.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
