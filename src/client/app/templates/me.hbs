@@ -1,0 +1,22 @@
+<h1>Logged in User</h1>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Display Name</th>
+      <th>UserPrincipalName</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model as |me|}}
+      <tr>
+        <th>{{me.givenName}}</th>
+        <td>{{me.surname}}</td>
+        <td>{{me.displayName}}</td>
+        <td>{{me.userPrincipalName}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
