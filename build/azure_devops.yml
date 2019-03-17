@@ -1,0 +1,48 @@
+pool:
+  name: Hosted VS2017
+  demands: npm
+
+steps:
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    workingDir: src/client
+    verbose: false
+
+- task: Npm@1
+  displayName: 'npm install ember-cli'
+  inputs:
+    command: custom
+    workingDir: src/client
+    verbose: false
+    customCommand: 'install -g ember-cli'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet restore'
+  inputs:
+    command: restore
+    projects: '**/*.csproj'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    projects: '**/*.csproj'
+    arguments: '-c release'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish'
+  inputs:
+    command: publish
+    publishWebProjects: false
+    projects: '**/*.csproj'
+    arguments: ' -o $(build.artifactstagingdirectory)/publish'
+
+- task: CopyFiles@2
+  displayName: 'Copy Config File'
+  inputs:
+    SourceFolder: config
+    TargetFolder: '$(build.artifactstagingdirectory)/config'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
+
