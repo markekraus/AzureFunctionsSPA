@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json.schemastore.org/proxies",
+    "proxies": {
+        "ui": {
+            "matchCondition": {
+                "route": "/{*path}"
+            },
+            "backendUri": "https://localhost/api/StaticFileServer?file={path}",
+            "disabled": false
+        },
+        "ui-files": {
+            "matchCondition": {
+                "route": "{file}.{ending}"
+            },
+            "backendUri": "https://localhost/api/StaticFileServer?file={file}.{ending}",
+            "disabled": false
+        },
+        "api": {
+            "matchCondition": {
+                "route": "api/{path}"
+            },
+            "backendUri": "https://localhost/api/{path}",
+            "disabled": false
+        },
+        "api-id": {
+            "matchCondition": {
+                "route": "api/{path}/{*id}"
+            },
+            "backendUri": "https://localhost/api/{path}/{id}",
+            "disabled": false
+        }
+    }
+}
