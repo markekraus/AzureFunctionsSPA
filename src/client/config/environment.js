@@ -4,7 +4,7 @@ module.exports = function(environment) {
   let ENV = {
     modulePrefix: 'mekspaaf',
     environment,
-    rootURL: '/',
+    rootURL: '',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
